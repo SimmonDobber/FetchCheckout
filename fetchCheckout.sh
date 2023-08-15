@@ -1,15 +1,18 @@
 #!/bin/bash
 
 SUFFIX=''
+UPDATE=''
 NAME=${@: -1}
 
-while getopts 's:h' flag; do
+while getopts 's:uh' flag; do
     case "${flag}" in
         s) SUFFIX="${OPTARG}" ;;
+        u) UPDATE="true" ;;
         h) 
             echo "Syntax: ./fetchCheckout [OPTIONS] [BRANCH_NAME]"
             echo "Options:"
-            echo "-h - prints help."
+            echo "-h    prints help."
+            echo "-u    updates branch."
             echo "-s [SUFFIX] searches only for branches ending with given suffix."
             exit 0 ;;
     esac
@@ -24,6 +27,9 @@ if [[ $NAME != $SUFFIX ]]; then
     if [[ ! -z $BRANCH ]] && [[ ${#BRANCH[@]} -gt 0 ]]; then
         git fetch
         git checkout $BRANCH
+        if [[ ! -z $UPDATE ]]; then
+            git merge $(git branch -a | grep 'origin'/$BRANCH)
+        fi
     else
         echo Given branch has not been found!
     fi
