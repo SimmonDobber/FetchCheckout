@@ -19,10 +19,8 @@ if [[ ! -z "$NAME" ]]; then
     if [[ -z $BRANCH ]] || [[ ${#BRANCH[@]} -eq 0 ]]; then
         echo Given branch has not been found!
     elif [[ ${#BRANCH[@]} -eq 1 ]]; then
-        echo git fetch
-        echo git checkout $BRANCH
-        #git fetch
-        #git checkout $BRANCH
+        git fetch
+        git checkout $BRANCH
     else
         echo Ambigous branch name!
     fi
