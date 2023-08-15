@@ -9,4 +9,5 @@
 
 ### Options:
 -h prints help.  
+-u updates branch.
 -s [SUFFIX] searches only for branches ending with given suffix.
