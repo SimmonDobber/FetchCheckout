@@ -15,7 +15,7 @@ while getopts 's:h' flag; do
     esac
 done
 
-if [[ ! -z "$NAME" ]]; then
+if [[ $NAME != $SUFFIX ]]; then
     if [[ $NAME =~ [0-9]+ ]]; then
         BRANCH=$(git branch -a | grep -v 'remotes' | grep -E [A-Z]+-$NAME[^0-9]+.*$SUFFIX$ | sort | head -1 | awk '{print $NF}')
     else
