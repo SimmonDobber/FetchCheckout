@@ -14,7 +14,7 @@ while getopts 's:uh' flag; do
             echo "Options:"
             echo "-h    prints help."
             echo "-u    updates branch."
-            echo "-s [SUFFIX] searches only for branches ending with given suffix."
+            echo "-s    [SUFFIX] searches only for branches ending with given suffix."
             exit 0 ;;
     esac
 done

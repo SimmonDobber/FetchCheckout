@@ -1,7 +1,7 @@
 # FetchCheckout
 
 ### An bash script for quicker git branch fetching and checkouting.
-#### It allows to search branches by their full name or just a number matching given format:  
+#### It allows to fetch and checkout branches by their full name or just a number matching given format:  
 [UPPERCASE_LETTERS]-[SEARCHED_NUMBER][THE_REST_OF_THE_NAME][OPTIONAL_SUFFIX]
 
 ### Syntax: 
