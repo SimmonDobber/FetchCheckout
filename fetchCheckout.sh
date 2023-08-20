@@ -27,10 +27,10 @@ if [[ $NAME != $SUFFIX ]]; then
     fi
     if [[ ! -z $BRANCH ]] && [[ ${#BRANCH[@]} -gt 0 ]]; then
         BRANCH=${BRANCH#$PREFIX}
-        echo git fetch
-        echo git checkout $BRANCH
+        git fetch
+        git checkout $BRANCH
         if [[ ! -z $UPDATE ]]; then
-            echo git merge $(git branch -a | grep 'origin'/$BRANCH$)
+            git merge $(git branch -a | grep 'origin'/$BRANCH$)
         fi
     else
         echo Given branch has not been found!
