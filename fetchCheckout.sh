@@ -1,5 +1,6 @@
 #!/bin/bash
 
+PREFIX="remotes/origin/"
 SUFFIX=''
 UPDATE=''
 NAME=${@: -1}
@@ -19,16 +20,17 @@ while getopts 's:uh' flag; do
 done
 
 if [[ $NAME != $SUFFIX ]]; then
-    if [[ $NAME =~ [0-9]+ ]]; then
-        BRANCH=$(git branch -a | grep -v 'remotes' | grep -E [A-Z]+-$NAME[^0-9]+.*$SUFFIX$ | sort | head -1 | awk '{print $NF}')
+    if [[ $NAME =~ ^[0-9]+$ ]]; then
+        BRANCH=$(git branch -a | grep -E [A-Z]+-$NAME[^0-9]+.*$SUFFIX$ | sort | head -1 | awk '{print $NF}')
     else
-        BRANCH=$(git branch -a | grep -v 'remotes' | grep -Ew $NAME | sort | head -1 | awk '{print $NF}')
+        BRANCH=$(git branch -a | grep -Ew $NAME | sort | head -1 | awk '{print $NF}')
     fi
     if [[ ! -z $BRANCH ]] && [[ ${#BRANCH[@]} -gt 0 ]]; then
-        git fetch
-        git checkout $BRANCH
+        BRANCH=${BRANCH#$PREFIX}
+        echo git fetch
+        echo git checkout $BRANCH
         if [[ ! -z $UPDATE ]]; then
-            git merge $(git branch -a | grep 'origin'/$BRANCH)
+            echo git merge $(git branch -a | grep 'origin'/$BRANCH$)
         fi
     else
         echo Given branch has not been found!
