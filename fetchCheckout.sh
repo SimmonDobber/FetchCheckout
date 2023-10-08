@@ -25,7 +25,7 @@ done
 
 if [[ -z $UPDATE ]]; then
 	if [[ $NAME =~ ^[0-9]+$ ]]; then
-		if [[ ! -z $USE_SUFFIX ]]; then
+		if [[ -n $USE_SUFFIX ]]; then
       BRANCH=$(git branch -a | grep -E [A-Z]+-$NAME[^0-9]+.*$SUFFIX$ | sort | head -1 | awk '{print $NF}')
 		else
 			BRANCH=$(git branch -a | grep -E [A-Z]+-$NAME[^0-9]+.* | sort | head -1 | awk '{print $NF}')
@@ -33,14 +33,14 @@ if [[ -z $UPDATE ]]; then
     else
       BRANCH=$(git branch -a | grep -E ^[[:space:]]*$NAME$ | sort | head -1 | awk '{print $NF}')
     fi
-    if [[ ! -z $BRANCH ]] && [[ ${#BRANCH[@]} -gt 0 ]]; then
+    if [[ -n $BRANCH ]] && [[ ${#BRANCH[@]} -gt 0 ]]; then
       BRANCH=${BRANCH#$PREFIX}
-		if [[ ! -z $COPY ]]; then
+		if [[ -n $COPY ]]; then
 			git checkout -b $BRANCH$SUFFIX $BRANCH
 		else 
       git fetch
       git checkout $BRANCH
-      if [[ ! -z $UPDATE ]]; then
+      if [[ -n $UPDATE ]]; then
         git merge $(git branch -a | grep 'origin'/$BRANCH$)
       fi
 		fi
