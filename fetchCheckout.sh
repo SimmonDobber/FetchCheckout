@@ -18,7 +18,7 @@ while getopts 's:uhc' flag; do
             echo "-h    prints help,"
             echo "-u    updates branch,"
             echo "-s    searches only for branches ending with '_master' suffix,"
-			echo "-c 	creates _master branch from give branch."
+            echo "-c 	creates _master branch from give branch."
             exit 0 ;;
     esac
 done
